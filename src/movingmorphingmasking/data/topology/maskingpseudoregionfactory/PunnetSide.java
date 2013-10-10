@@ -1,4 +1,4 @@
-package movingmorphingmasking.data.topology.punnetresolvefactory;
+package movingmorphingmasking.data.topology.maskingpseudoregionfactory;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
