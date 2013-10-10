@@ -9,14 +9,14 @@ import kn.uni.voronoitreemap.j2d.PolygonSimple;
 import movingmorphingmasking.data.util.comparator.DistanceToPointComparator;
 
 /**
- * A PunnetSide is a side of a
+ * A PseudoRegionSide is a side of a
  * <code>PolygonSimple</code> that is tesselated by other
  * <code>PolygonSimple</code>. This side could be a pseudo separator in a
  * tesselation and needed to getting smoothed.
  *
  * @author julia schueler
  */
-public class PunnetSide {
+public class PseudoRegionSide {
 
     private double x1, x2, y1, y2;
     private double sideLengthSq;
@@ -25,20 +25,20 @@ public class PunnetSide {
 
     /**
      * Constructor for a
-     * <code>PunnetSide</code> with the start point and end point as
+     * <code>PseudoRegionSide</code> with the start point and end point as
      * <code>Pont2D</code>.
      *
      * @param p1 start point of the side
      * @param p2 end point of the side
      */
-    public PunnetSide(Point2D p1, Point2D p2) {
+    public PseudoRegionSide(Point2D p1, Point2D p2) {
         this(p1.getX(), p1.getY(), p2.getX(), p2.getY());
 
     }
 
     /**
      * Constructor for a
-     * <code>PunnetSide</code> with the start point (x1,y1) and end point (x2,
+     * <code>PseudoRegionSide</code> with the start point (x1,y1) and end point (x2,
      * y2).
      *
      * @param x1 X Coordinate of the start point
@@ -46,7 +46,7 @@ public class PunnetSide {
      * @param x2 X Coordinate of the end point.
      * @param y2 Y Coordinate of the end point.
      */
-    public PunnetSide(double x1, double y1, double x2, double y2) {
+    public PseudoRegionSide(double x1, double y1, double x2, double y2) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
@@ -62,7 +62,7 @@ public class PunnetSide {
 
     /**
      * Adds a polygon the belongs to this
-     * <code>PunnetSide</code>.
+     * <code>PseudoRegionSide</code>.
      *
      * @param polygon polygon that belongs to this
      * @return <tt>true</tt> (as specified by {@link Collection#add})
@@ -73,7 +73,7 @@ public class PunnetSide {
 
     /**
      * Returns the count of polygons that belongs to this
-     * <code>PunnetSide</code>.
+     * <code>PseudoRegionSide</code>.
      *
      * @return count of polygons.
      */
@@ -143,7 +143,7 @@ public class PunnetSide {
      * Returns if a a specific point (x,y) is on this side 
      * (
      *
-     * @see as specified by {@link PunnetSide#isOnSide})).
+     * @see as specified by {@link PseudoRegionSide#isOnSide})).
      * @param x1 X Coordinate of the start point of specific side.
      * @param y1 Y Coordinate of the start point of specific side.
      * @param x2 X Coordinate of the end point of specific side.
@@ -153,14 +153,14 @@ public class PunnetSide {
      * @return <tt>true</tt>
      */
     public static boolean isOnSide(double x1, double y1, double x2, double y2, double x, double y) {
-        return new PunnetSide(x1, y1, x2, y2).isOnSide(x, y);
+        return new PseudoRegionSide(x1, y1, x2, y2).isOnSide(x, y);
     }
 
     /**
      * Returns the position of a specific point(x,y) on this side. It returns -1
-     * if the point is not an added point (@link PunnetSide#addPoint), 
+     * if the point is not an added point (@link PseudoRegionSide#addPoint), 
      * or start point or a end point of this.
-     * (NOTE: use before @link PunnetSide#sortPointsOnSide).
+     * (NOTE: use before @link PseudoRegionSide#sortPointsOnSide).
      *
      * @param x X Coordinate of a specific point.
      * @param y Y Coordinate of a specific point.
@@ -179,11 +179,11 @@ public class PunnetSide {
     /**
      * Returns all the <code>Point2D</code> included the specific
      * start point (x1, y1) and specific end point (x2, y2) and all
-     * added points (@link PunnetSide#addPoint) between them.
-     * (NOTE: use before @link PunnetSide#sortPointsOnSide).
+     * added points (@link PseudoRegionSide#addPoint) between them.
+     * (NOTE: use before @link PseudoRegionSide#sortPointsOnSide).
      * 
      * It returns an empty list, if the specific start point or end point is
-     * not an start or end point of this or an added point (@link PunnetSide#addPoint).
+     * not an start or end point of this or an added point (@link PseudoRegionSide#addPoint).
      * 
      * @param x1
      * @param y1
