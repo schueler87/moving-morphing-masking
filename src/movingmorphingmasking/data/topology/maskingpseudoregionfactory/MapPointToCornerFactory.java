@@ -37,12 +37,12 @@ public class MapPointToCornerFactory {
      * tesselation of the base polygon as pseudo region polygons.
      * 
      * The mapped <code>CornerPoint2D</code> is moveable 
-     * (@see specified by CornerPoint2D#MOVABLE), if it lays on a side
+     * (@see specified by {@link CornerPoint2D#MOVABLE}), if it lays on a side
      * of a pseudo region polygon, if it lays in addition on a base polygon side,
      * but is not a corner of the base polygon, it is a line slider
-     * (@see specified by CornerPoint2D#LineSlider). 
+     * (@see specified by {@link CornerPoint2D#LineSlider}). 
      * Otherwise the <code>CornerPoint2D</code> is immovable
-     * (@see specified by CornerPoint2D#IMMOVABLE).
+     * (@see specified by {@link CornerPoint2D#IMMOVABLE}).
      * 
      * @param pseudoRegionPolygones tesselation of the base polygon in pseudo
      * regions.
@@ -112,7 +112,7 @@ public class MapPointToCornerFactory {
             double y1 = yi[i];
             double x2 = xi[(i + 1) % n];
             double y2 = yi[(i + 1) % n];
-            if (PunnetSide.isOnSide(x1, y1, x2, y2, x, y)) {
+            if (PseudoRegionSide.isOnSide(x1, y1, x2, y2, x, y)) {
                 return new CornerPoint2D.LineSlider(x, y, new Line2D.Double(x1, y1, x2, y2));
             }
         }
