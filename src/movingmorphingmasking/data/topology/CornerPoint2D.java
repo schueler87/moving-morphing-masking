@@ -173,6 +173,7 @@ public abstract class CornerPoint2D extends Point2D {
      * @serial
      */
     protected double y;
+    protected boolean visited;
     private List<CornerPoint2D> incidentCorners;
     private List<PolygonDeformable> associatedPolygons;
 
@@ -190,8 +191,26 @@ public abstract class CornerPoint2D extends Point2D {
     protected CornerPoint2D(double x, double y) {
         this.x = x;
         this.y = y;
+        
+        this.visited = false;
         incidentCorners = new ArrayList<CornerPoint2D>(10);
         associatedPolygons = new ArrayList<PolygonDeformable>(10);
+    }
+
+    /**
+     * Sets the visited status.
+     * @param visited 
+     */
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    /**
+     * Returns if the CornerPoint2D is already visited.
+     * @return 
+     */
+    public boolean isVisited() {
+        return visited;
     }
 
     /**
@@ -226,7 +245,7 @@ public abstract class CornerPoint2D extends Point2D {
     }
 
     /**
-     * Addss as an associated
+     * Adds as an associated
      * <code>PolygonDeformable</code> of this.
      *
      * @return <tt>true</tt> (as specified by {@link Collection#add})
