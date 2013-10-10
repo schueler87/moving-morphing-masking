@@ -20,7 +20,7 @@ public class PseudoRegionSide {
 
     private double x1, x2, y1, y2;
     private double sideLengthSq;
-    private List<PolygonSimple> connectedPolygons;
+    private List<PolygonSimple> associatedPolygons;
     private List<Point2D> pointsOnSide;
 
     /**
@@ -54,7 +54,7 @@ public class PseudoRegionSide {
 
         this.sideLengthSq = Point2D.distanceSq(x1, y1, x2, y2);
 
-        this.connectedPolygons = new ArrayList<PolygonSimple>(2);
+        this.associatedPolygons = new ArrayList<PolygonSimple>(2);
         this.pointsOnSide = new ArrayList<Point2D>();
         this.pointsOnSide.add(new Point2D.Double(x1, y1));
         this.pointsOnSide.add(new Point2D.Double(x2, y2));
@@ -67,8 +67,8 @@ public class PseudoRegionSide {
      * @param polygon polygon that belongs to this
      * @return <tt>true</tt> (as specified by {@link Collection#add})
      */
-    public boolean addConnectedPolygon(PolygonSimple polygon) {
-        return connectedPolygons.add(polygon);
+    public boolean addAssociatedPolygon(PolygonSimple polygon) {
+        return associatedPolygons.add(polygon);
     }
 
     /**
@@ -77,8 +77,8 @@ public class PseudoRegionSide {
      *
      * @return count of polygons.
      */
-    public int getConnectedPolygonCount() {
-        return connectedPolygons.size();
+    public int getAssociatedPolygonCount() {
+        return associatedPolygons.size();
     }
 
     /**
