@@ -253,12 +253,15 @@ public abstract class CornerPoint2D extends Point2D {
 
     /**
      * Add a incident
-     * <code>CornerPoint2D</code> of this.
+     * <code>CornerPoint2D</code> of this, if it is not already added.
      *
      * @param corner incident cornerPoint2D
      * @return
      */
     public boolean addIncidentCorner(CornerPoint2D corner) {
+        if(incidentCorners.contains(corner)){
+            return false;
+        }
         return incidentCorners.add(corner);
     }
 
