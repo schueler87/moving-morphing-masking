@@ -2,8 +2,8 @@ package movingmorphingmasking.data.topology;
 
 /**
  * The
- * <code>PolygonDeformable</code> class defines a
- * polygon with movable corners.
+ * <code>PolygonDeformable</code> class defines a polygon with movable corners.
+ *
  * @author julia schueler
  */
 public class PolygonDeformable {
@@ -13,18 +13,21 @@ public class PolygonDeformable {
 
     /**
      * The
-     * <code>PolygonDeformable</code> class defines a
-     * polygon with movable <code>CornerPoint2D</code>
+     * <code>PolygonDeformable</code> class defines a polygon with movable
+     * <code>CornerPoint2D</code>
+     *
      * @param corners movable corners of this.
-     * @param targetArea the polygon should have the surface area. 
+     * @param targetArea the polygon should have the surface area.
      */
     public PolygonDeformable(CornerPoint2D[] corners, double targetArea) {
         this.corners = corners;
         this.targetArea = targetArea;
+        connectCornersAndPolygon();
     }
 
     /**
      * Returns the targetArea of this.
+     *
      * @return target area.
      */
     public double getTagetArea() {
@@ -56,10 +59,23 @@ public class PolygonDeformable {
     }
 
     /**
-     * Returns the corners of the <code>PolygonDeformable</code>.
+     * Returns the corners of the
+     * <code>PolygonDeformable</code>.
+     *
      * @return corners of this.
      */
     public CornerPoint2D[] getCorners() {
         return corners;
+    }
+
+    private void connectCornersAndPolygon() {
+        int n = corners.length;
+        for (int i = 0; i < corners.length; i++) {
+            CornerPoint2D cornerPoint2D = corners[i];
+            cornerPoint2D.addAssociatedPolygon(this);
+            CornerPoint2D neighbor = corners[(i + 1) % n];
+            cornerPoint2D.addIncidentCorner(neighbor);
+            neighbor.addIncidentCorner(cornerPoint2D);
+        }
     }
 }
