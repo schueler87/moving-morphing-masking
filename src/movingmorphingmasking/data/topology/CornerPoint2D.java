@@ -18,6 +18,10 @@ import java.util.List;
  */
 public abstract class CornerPoint2D extends Point2D {
 
+    public static final String IS_MOVABLE = "movable";
+    public static final String IS_IMMOVABLE = "immovable";
+    public static final String IS_LINESLIDER = "line slider";
+
     /**
      * The
      * <code>Immovable</code> class defines a
@@ -30,8 +34,10 @@ public abstract class CornerPoint2D extends Point2D {
          * Constructs and initializes a
          * <code>CornerPoint2D</code> with the specified coordinates.
          *
-         * @param x the X coordinate of the newly constructed <code>CornerPoint2D</code>
-         * @param y the Y coordinate of the newly constructed <code>CornerPoint2D</code>
+         * @param x the X coordinate of the newly
+         * constructed <code>CornerPoint2D</code>
+         * @param y the Y coordinate of the newly
+         * constructed <code>CornerPoint2D</code>
          * @since 1.2
          */
         public Immovable(double x, double y) {
@@ -48,6 +54,11 @@ public abstract class CornerPoint2D extends Point2D {
         @Override
         protected void setClosestToDesiredLocation(double x, double y) {
         }
+
+        @Override
+        public String getInstance() {
+            return IS_IMMOVABLE;
+        }
     }
 
     /**
@@ -62,8 +73,10 @@ public abstract class CornerPoint2D extends Point2D {
          * Constructs and initializes a
          * <code>CornerPoint2D</code> with the specified coordinates.
          *
-         * @param x the X coordinate of the newly constructed <code>CornerPoint2D</code>
-         * @param y the Y coordinate of the newly constructed <code>CornerPoint2D</code>
+         * @param x the X coordinate of the newly
+         * constructed <code>CornerPoint2D</code>
+         * @param y the Y coordinate of the newly
+         * constructed <code>CornerPoint2D</code>
          */
         public Movable(double x, double y) {
             super(x, y);
@@ -81,6 +94,11 @@ public abstract class CornerPoint2D extends Point2D {
         protected void setClosestToDesiredLocation(double x, double y) {
             this.x = x;
             this.y = y;
+        }
+
+        @Override
+        public String getInstance() {
+            return IS_MOVABLE;
         }
     }
 
@@ -102,8 +120,10 @@ public abstract class CornerPoint2D extends Point2D {
          * Constructs and initializes a
          * <code>CornerPoint2D</code> with the specified coordinates.
          *
-         * @param x the X coordinate of the newly * * * *          * constructed <code>CornerPoint2D</code>
-         * @param y the Y coordinate of the newly * * * *          * constructed <code>CornerPoint2D</code>
+         * @param x the X coordinate of the newly * * * * *
+         * constructed <code>CornerPoint2D</code>
+         * @param y the Y coordinate of the newly * * * * *
+         * constructed <code>CornerPoint2D</code>
          * @param line2D the line the point has always located on.
          */
         public LineSlider(double x, double y, Line2D.Double line2D) {
@@ -158,7 +178,13 @@ public abstract class CornerPoint2D extends Point2D {
             this.x = nx;
             this.y = ny;
         }
+
+        @Override
+        public String getInstance() {
+            return IS_LINESLIDER;
+        }
     }
+    
     /**
      * The X coordinate of this
      * <code>CornerPoint2D</code>.
@@ -191,7 +217,7 @@ public abstract class CornerPoint2D extends Point2D {
     protected CornerPoint2D(double x, double y) {
         this.x = x;
         this.y = y;
-        
+
         this.visited = false;
         incidentCorners = new ArrayList<CornerPoint2D>(10);
         associatedPolygons = new ArrayList<PolygonDeformable>(10);
@@ -199,7 +225,8 @@ public abstract class CornerPoint2D extends Point2D {
 
     /**
      * Sets the visited status.
-     * @param visited 
+     *
+     * @param visited
      */
     public void setVisited(boolean visited) {
         this.visited = visited;
@@ -207,7 +234,8 @@ public abstract class CornerPoint2D extends Point2D {
 
     /**
      * Returns if the CornerPoint2D is already visited.
-     * @return 
+     *
+     * @return
      */
     public boolean isVisited() {
         return visited;
@@ -276,8 +304,7 @@ public abstract class CornerPoint2D extends Point2D {
      * specified
      * <code>Point2D</code>.
      *
-     * @param p the desired <code>Point2D</code> to which to set * * * *
-     * this <code>CornerPoint2D</code>.
+     * @param p the desired <code>Point2D</code> to which to set * * * *      * this <code>CornerPoint2D</code>.
      */
     @Override
     public void setLocation(Point2D p) {
@@ -297,6 +324,13 @@ public abstract class CornerPoint2D extends Point2D {
     public void setLocation(double x, double y) {
         setClosestToDesiredLocation(x, y);
     }
+    
+    /**
+     * Returns an string that explain what an instance this is.
+     * (@link CornerPoint2D#IS_MOVABLE, @link CornerPoint2D#IS_IMMOVABLE , @link CornerPoint2D#IS_LINESLIDER)
+     * @return 
+     */
+    public abstract String getInstance();
 
     /**
      * Sets the location of this
